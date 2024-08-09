@@ -14,7 +14,7 @@ function AnimesPage() {
             </section>
             <section id="container">
                 <div className='card'>
-                    <img src="src/assets/animes/higurashi.jpg" alt="Higurashi anime 2006" />
+                    <img src="/higurashi.jpg" alt="Higurashi anime 2006" />
                     <p>Higurashi No Naku Koro Ni</p>
                     <p>Higurashi When They Cry</p>
                     <a href="https://myanimelist.net/anime/934/Higurashi_no_Naku_Koro_ni" target='_blank'>MyAnimeList</a>
