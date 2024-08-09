@@ -41,20 +41,20 @@ function AnimesPage() {
                 </div>
 
                 <div className='card'>
-                    <img src="src/assets/animes/steins_gate.jpg" alt='Steins;gate' />
+                    <img src="/steins_gate.jpg" alt='Steins;gate' />
                     <p>Steins;Gate</p>
                     <a href="https://myanimelist.net/anime/9253/Steins_Gate" target='_blank'>MyAnimeList</a>
                     <p><i>It's the choice of Steins Gate. </i>- Okabe Rintaro</p>
                 </div>
 
                 <div className='card'>
-                    <img src="src/assets/animes/madoka_magica.jpg" alt='Madoka Magica Anime' />
+                    <img src="/madoka_magica.jpg" alt='Madoka Magica Anime' />
                     <p>Puella Magi Madoka Magica</p>
                     <a href="https://myanimelist.net/anime/9756/Mahou_Shoujo_Madoka%E2%98%85Magica" target='blank'>MyAnimeList</a>
                 </div>
 
                 <div className='card'>
-                    <img src="src/assets/animes/frieren.jpg" alt='Sousou no Frieren' />
+                    <img src="/frieren.jpg" alt='Sousou no Frieren' />
                     <p>Sousou No Frieren</p>
                     <a href='https://myanimelist.net/anime/52991/Sousou_no_Frieren' target='blank'>MyAnimeList</a>
                 </div>
