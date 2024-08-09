@@ -1,0 +1,12 @@
+main {
+    font-size: 14px;
+}
+#misskeylogo{
+    filter:invert(100%);
+    width: 100%;
+    height: 50px;
+}
+
+#imgsuspend{
+    width: 200px;
+}

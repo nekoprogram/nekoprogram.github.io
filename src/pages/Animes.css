@@ -1,0 +1,22 @@
+#container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100vh;
+}
+.card img {
+    width: 150px;
+}
+
+#danger {
+    padding:20px;
+    color:red;
+}
+
+
+@media screen and (max-width:550px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
