@@ -15,7 +15,7 @@ function Home() {
         <p>Currently exploring the <strong>Fediverse</strong></p>
             <p>You can follow me on:</p>
             <ul>
-                <li><a rel="me" href="https://misskey.social/@programneko" target="_blank"><img id="misskeylogo" src="src/assets/misskey.svg"/> (English mostly)</a> an a
+                <li><a rel="me" href="https://misskey.social/@programneko" target="_blank"><img id="misskeylogo" src="/misskey.svg"/> (English mostly)</a> an a
                     little japanese, that i'm learning... <em>はい日本語を勉強すます。</em></li>
                 <li><a rel="me" href="https://tkz.one/@nekoprogram" target="_blank"><FontAwesomeIcon icon={faMastodon}></FontAwesomeIcon> Mastodon (In Spanish)</a></li>
                 <li><a rel="me" href="https://miruku.cafe/@nekoprogram" target="_blank">Miruku.cafe (In English)</a></li>
