@@ -32,10 +32,10 @@ function AnimesPage() {
                             <li>Higurashi No Naku Koro Ni GOU (2020)</li>
                             <li>Higurashi No Naku Koro Ni SOTSU (2021)</li>
                         </ol>
-            <p>After that, i recommend you to read umineko</p>
-            <p> but please PLEASE DON'T WATCH UMINEKO ANIME</p>
-            <p>Because anime is incomplete and very very bad</p>
-            <p>instead you can read the manga or the visual novel</p>
+                        <p>After that, i recommend you to read umineko</p>
+                        <p> but please PLEASE DON'T WATCH UMINEKO ANIME</p>
+                        <p>Because anime is incomplete and very very bad</p>
+                        <p>instead you can read the manga or the visual novel</p>
 
                     </div>
                 </div>
