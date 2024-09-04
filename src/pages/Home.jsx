@@ -36,7 +36,7 @@ function Home() {
           <div className="hcard">
             <header>
               <h3>MASTO.ES (SPANISH /SFW)</h3>
-              <a rel="me" href="https://masto.es/@nekoprogram" target="_blank">Mastodon (In Spanish)</a>
+              <a rel="me" href="https://masto.es/@nekoprogram">Mastodon</a>
             </header>
           </div>
 
