@@ -17,23 +17,26 @@ function Home() {
         <section className='container-sns'>
           <div className="hcard">
             <header>
-              <h3><a rel="me" href="https://misskey.social/@programneko" target="_blank">Misskey Social</a><span class="nsfw">(NSFW / Hentai)</span></h3>
+              <h3> Instance Misskey Social <span className="nsfw">(NSFW)</span></h3>
+              <a rel="me" href="https://misskey.social/@programneko" target="_blank">Misskey Social</a><span class="nsfw">(NSFW / Hentai)</span>
             </header>
           </div>
           <div className="hcard">
             <header>
-              <h3><a rel="me" href="https://aethy.com/@nekoprogram_nsfw" target="_blank">Aethy</a><span class="nsfw">(NSFW / Hentai)</span></h3>
+              <h3>Instance Aethy.com <span className='nsfw'>(NSFW)</span></h3>
+              <a rel="me" href="https://aethy.com/@nekoprogram_nsfw" target="_blank">Aethy</a><span class="nsfw">(NSFW / Hentai)</span>
             </header>
           </div>
           <div className="hcard">
             <header>
-              <h3><a rel="me" href="https://miruku.cafe/@nekoprogram" target="_blank">Miruku.cafe (In English)</a>(SFW)</h3>
+              <h3>MIRUKU.CAFE (SFW)</h3>
+              <a rel="me" href="https://miruku.cafe/@nekoprogram" target="_blank">Miruku.cafe (In English)</a>
             </header>
           </div>
           <div className="hcard">
             <header>
-              <h3><a rel="me" href="https://masto.es/@nekoprogram" target="_blank">Mastodon (In Spanish)</a>(SFW)</h3>
-             
+              <h3>MASTO.ES (SPANISH /SFW)</h3>
+              <a rel="me" href="https://masto.es/@nekoprogram" target="_blank">Mastodon (In Spanish)</a>
             </header>
           </div>
 
