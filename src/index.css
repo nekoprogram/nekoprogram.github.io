@@ -1,8 +1,8 @@
 @media (max-width:480px) {
     main {
-        display: flex;
-        height: auto;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: auto;
+        height: 100%;
     }
 
 

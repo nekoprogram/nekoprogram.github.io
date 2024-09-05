@@ -30,8 +30,13 @@ main {
     align-content: center;
     border:1px solid green;
     max-width: auto;
+    
 }
 
+#texto 
+{
+    padding-top:100px;
+}
 
 @media (max-width:480px) {
     .container-sns{
@@ -41,7 +46,7 @@ main {
         justify-items: center;
     }
     .card{
-        width: 75%;
+        width: 100%;
         
     }
 }

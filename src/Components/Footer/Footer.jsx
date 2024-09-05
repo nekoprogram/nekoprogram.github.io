@@ -7,8 +7,9 @@ export default function Footer(props)
 
 
 
-    return <footer>
+    return(
+    <footer>
         <p>Copyright &copy;  NekoProgram / ProgramNeko</p>
         <p id="year">{currentYear}</p>
-    </footer>
+    </footer> )
 }

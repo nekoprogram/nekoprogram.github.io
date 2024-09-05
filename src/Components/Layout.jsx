@@ -19,8 +19,9 @@ export default function Layout() {
                 <section id="rightsection">
                     <Outlet/>
                 </section>
-                <Footer/>
+                
             </main>
+            <Footer></Footer>
         </>
     )
 }
