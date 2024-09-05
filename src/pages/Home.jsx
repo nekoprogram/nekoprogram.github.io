@@ -46,7 +46,7 @@ function Home() {
           <p>Because mainly i don't like who fediverse works, an admin can block other instances and me as user i wish to follow any account on fedi</p>
           <p>I now that the <b>perfect solution</b> is set up my own instance and i'll do someday but for now i cannot buy a domain T_T</p>
           <hr />
-          <p>Also i'm looking at  <a target="_blank" href="https://bsky.app/profile/nekoprogram.bsky.social">Bluesky <FontAwesomeIcon icon={faBluesky}>Bluesky</FontAwesomeIcon> </a></p>
+          <p>Also i'm looking at  <a target="_blank" href="https://bsky.app/profile/nekoprogram.neocities.org">Bluesky <FontAwesomeIcon icon={faBluesky}>Bluesky</FontAwesomeIcon> </a></p>
           <p>Trying to <strong>DON'T USE</strong> Twitter <i className="fa fa-brands fa-tiwtter"></i>, but is very difficult... (Some Accounts that I follow
             remain in that site...)</p>
           <p>Oh nyan Now i think is called <FontAwesomeIcon icon={faXTwitter}></FontAwesomeIcon>? right?</p>
