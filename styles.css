@@ -6,7 +6,7 @@
 
 body {
     width: 100%;
-    height: auto;
+    height: 100vh;
 }
 
 main {
@@ -18,7 +18,7 @@ main {
     color: #fff;
     gap: 50px;
     font-family: Helvetica, sans-serif;
-
+    overflow: auto;
 }
 
 main section div {
