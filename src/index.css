@@ -1,9 +1,0 @@
-@media (max-width:480px) {
-    main {
-        display: grid;
-        grid-template-columns: auto;
-        height: 100%;
-    }
-
-
-}
