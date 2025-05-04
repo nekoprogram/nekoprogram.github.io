@@ -60,12 +60,14 @@ img {
     flex-direction: column;
     align-items: center;
 }
+#master-container {
+    display: flex;
+}
 
 #card-container {
     display: grid;
-    gap: 30px;
+    gap: 20px;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 100px 100px;
 }
 
 #card-container header {
@@ -76,14 +78,8 @@ img {
     padding: 0px !important;
     
 }
-#centralized {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 100px 100px;
-}
-#centralized .card {
-    background-color: rgb(46, 46, 46);
+#links  {
+    text-align: center;
 
 }
 .card {
@@ -128,7 +124,6 @@ img {
     display: flex;
     gap:30px;
 
-    padding:20px;
 }
 #l1,#l2 {
     padding: 5px;
