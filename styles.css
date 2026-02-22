@@ -16,7 +16,7 @@ main {
     align-items: center;
     background-color: rgb(46, 46, 46);
     color: #fff;
-    gap: 50px;
+    gap: 20px;
     font-family: Helvetica, sans-serif;
     overflow: auto;
 }
@@ -27,7 +27,7 @@ main section div {
 
 a {
     color: #e6e4e4;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 a:hover {
@@ -73,12 +73,30 @@ img {
 }
 
 footer {
-    position: fixed;
-    bottom: 20px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    /* Quitamos el position: fixed para que no tape nada */
+    margin-top: auto; 
 }
-
 .share-tech-mono-regular {
     font-family: "Share Tech Mono", monospace;
     font-weight: 400;
     font-style: normal;
+}
+
+/* Agrupa los párrafos informativos para que no se separen tanto */
+#text p {
+    margin-bottom: -15px; /* Reduce el efecto del gap de 30px del padre */
+}
+
+/* El último párrafo antes del GIF necesita recuperar espacio */
+#text p:last-of-type {
+    margin-bottom: 10px;
+}
+
+#gifdance {
+    width: 150px;
+    height: auto;
+    margin-top: 10px; /* Un poco de aire sobre Homura */
 }
