@@ -1,10 +1,10 @@
 ---
-title: "Mi primer post en Astro"
+title: "My first post in Astro"
 date: 2026-06-10
-description: "Aprendiendo Astro desde cero para hacer un blog cyberpunk."
+description: "Learning Astro from scratch to make a  cyberpunk blog."
 tags: ["astro", "web","first-post"]
 ---
 
-# ¡Hola Mundo!
+# Hello World! ¡Hola Mundo!
 
-Este es el contenido de mi post escrito en **Markdown**. Astro lo transformará en HTML de forma automática.
+This is the content of my post written in **Markdown**. Astro will be auto-convert to HTML 

@@ -308,3 +308,6 @@ footer p {
 #scrollTopBtn:hover {
   background: #acacac;
 }
+.no-radius{
+    border-radius: 0%;
+}

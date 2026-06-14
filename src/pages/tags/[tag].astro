@@ -38,7 +38,7 @@ const { tag } = Astro.params;
 const { posts, animes } = Astro.props;
 ---
 
-<Layout title={`Contenido etiquetado con #${tag}`}>
+<Layout title={`Content labeled with #${tag}`}>
   <article>
     <!-- Botón para regresar al index principal -->
     <a href="/" class="back-link">
@@ -46,17 +46,17 @@ const { posts, animes } = Astro.props;
         <line x1="19" y1="12" x2="5" y2="12"></line>
         <polyline points="12 19 5 12 12 5"></polyline>
       </svg>
-      Volver al inicio
+      Back to Home
     </a>
 
-    <h2>Contenido con etiqueta <span class="highlight">#{tag}</span></h2>
+    <h2>Content(s) with Tag <span class="highlight">#{tag}</span></h2>
     <p style="color: #888; margin-bottom: 30px;">
-      Se encontraron {posts.length} artículo(s) y {animes.length} anime(s).
+      Found {posts.length} article(s) and {animes.length} anime(s).
     </p>
 
     <!-- SECCIÓN DE BLOGS -->
     {posts.length > 0 && (
-      <h3>Artículos del Blog</h3>
+      <h3>Blog Articles</h3>
       <ul style="margin-bottom: 30px;">
         {posts.map(post => (
           <li style="margin-bottom: 15px;">
