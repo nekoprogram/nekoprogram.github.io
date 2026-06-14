@@ -1,0 +1,95 @@
+---
+// src/pages/tags/[tag].astro
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const allAnimes = await getCollection('anime');
+
+  // Juntamos todos los tags únicos de BLOG y ANIME en una sola lista sin duplicados
+  const allTags = [
+    ...allPosts.map((post) => post.data.tags || []).flat(),
+    ...allAnimes.map((anime) => anime.data.tags || []).flat()
+  ];
+  const uniqueTags = [...new Set(allTags)];
+  
+  // Generamos las páginas para cada etiqueta existente
+  return uniqueTags.map((tag) => {
+    // Filtramos los posts del blog que tienen esta etiqueta
+    const filteredPosts = allPosts.filter((post) => post.data.tags?.includes(tag));
+    const sortedPosts = filteredPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+    // Filtramos los animes que tienen esta etiqueta
+    const filteredAnimes = allAnimes.filter((anime) => anime.data.tags?.includes(tag));
+    // Si tus animes también tienen fecha, puedes ordenarlos aquí igual que los posts
+
+    return {
+      params: { tag },
+      props: { 
+        posts: sortedPosts,
+        animes: filteredAnimes
+      },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts, animes } = Astro.props;
+---
+
+<Layout title={`Contenido etiquetado con #${tag}`}>
+  <article>
+    <!-- Botón para regresar al index principal -->
+    <a href="/" class="back-link">
+      <svg style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Volver al inicio
+    </a>
+
+    <h2>Contenido con etiqueta <span class="highlight">#{tag}</span></h2>
+    <p style="color: #888; margin-bottom: 30px;">
+      Se encontraron {posts.length} artículo(s) y {animes.length} anime(s).
+    </p>
+
+    <!-- SECCIÓN DE BLOGS -->
+    {posts.length > 0 && (
+      <h3>Artículos del Blog</h3>
+      <ul style="margin-bottom: 30px;">
+        {posts.map(post => (
+          <li style="margin-bottom: 15px;">
+            <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            <span style="font-size: 0.8em; color: #888; display: block; margin-bottom: 4px;">
+              {post.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+            <div class="tag-container">
+              {post.data.tags.map(t => (
+                <a href={`/tags/${t}`} class={`tag ${t === tag ? 'active' : ''}`}>#{t}</a>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <!-- SECCIÓN DE ANIMES -->
+    {animes.length > 0 && (
+      <h3>Animes</h3>
+      <ul>
+        {animes.map(anime => (
+          <li style="margin-bottom: 15px;">
+            {/* Ajusta la ruta /anime/ según cómo sea en tu web */}
+            <a href={`/animes/${anime.id}`}>{anime.data.title}</a>
+            <div class="tag-container" style="margin-top: 4px;">
+              {anime.data.tags.map(t => (
+                <a href={`/tags/${t}`} class={`tag ${t === tag ? 'active' : ''}`}>#{t}</a>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </article>
+</Layout>

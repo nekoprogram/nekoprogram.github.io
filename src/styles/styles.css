@@ -1,0 +1,310 @@
+/* === REINICIO GLOBAL === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    /* Un gris oscuro más suave y elegante */
+    color: #e0e0e0;
+    font-family: 'Share Tech Mono', Arial, Helvetica, sans-serif;
+    /* Tu fuente cyberpunk para todo */
+    line-height: 1.6;
+    
+}
+
+
+/* === CONTENEDOR PRINCIPAL (LAYOUT) === */
+main {
+    max-width: 850px;
+    width: 100%;
+    min-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* Separación limpia entre Header, Contenido y Footer */
+    text-align: left;
+    padding:20px;
+}
+
+/* === CONTENIDO MARKDOWN (POSTS DE ASTRO) === */
+.markdown-content {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.markdown-content p {
+    margin-bottom: 16px;
+    /* CORRECCIÓN: 3px era muy poco espacio, dificultaba la lectura */
+    text-align: left;
+    /* Asegura que el post sea cómodo de leer */
+}
+
+.astro-code,
+.astro-code * {
+    font-family: monospace !important;
+    /* Mantiene el código como código */
+}
+
+/* === HEADER === */
+header {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    /* Línea sutil divisoria */
+    padding-bottom: 10px;
+    gap: 10px;
+    width: 100%;
+}
+
+#title-container h1 {
+    font-size: 30px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+#title-container h4 {
+    color: #888;
+    font-weight: normal;
+}
+
+header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #444;
+}
+
+/* === CONTENIDO (INDEX / SLOTS) === */
+article {
+    flex: 1;
+    /* Empuja al footer hacia abajo de forma limpia */
+}
+
+/* Distribución del Index (Links vs Texto) */
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+#index-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* MEJORA: Empezamos en 1 columna para móviles */
+    gap: 20px;
+}
+
+/* === ELEMENTOS INTERNOS === */
+h1,
+h2,
+h3,
+h4 {
+    color: #fff;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    margin-bottom: 12px;
+}
+
+/* Enlaces estilo botones minimalistas */
+a {
+    color: #d66060;
+    /* Un toque de color hacker/cyber cat (Rojo) */
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #f1bcf3;
+}
+
+/* El GIF de Homura */
+#gifdance {
+    max-width: 140px;
+    height: auto;
+    margin: 20px auto 0 auto;
+    /* Simplificado para centrar en móviles */
+    border-radius: 4px;
+    opacity: 0.9;
+    display: block;
+}
+
+#text p {
+    margin: 12px;
+}
+
+/* === FOOTER === */
+footer {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    color: #666;
+}
+footer p {
+    font-size: 12px;
+}
+/* Aviso de la web principal en el Header */
+.main-site-notice {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 8px;
+}
+
+.main-site-notice a {
+    text-decoration: underline;
+    font-size: 0.9rem;
+    /* Mantiene el tamaño del texto pequeño */
+    display: inline;
+    /* Hace que fluya bien dentro del párrafo */
+    padding: 0;
+}
+
+#nekoweb-link {
+    color: #FFA77D;
+}
+
+#neocities-link {
+    color: #5FED4E;
+}
+
+.main-site-notice a:hover {
+    color: #fff;
+    background: transparent;
+    /* Evita que se pinte el fondo en este enlace específico */
+}
+
+/* === ESTILOS PARA LOS TAGS === */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    font-size: 0.75rem;
+    color: #888;
+    background-color: #222;
+    border: 1px solid #333;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: lowercase;
+    text-decoration: none;
+    display: inline-block;
+    /* Asegura que el padding funcione bien */
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    color: #f59089;
+    border-color: #f59089;
+    background-color: #1a2926;
+    text-shadow: 0 0 5px #f59089;
+}
+
+.tag.active {
+    color: #00ffcc;
+    border-color: #00ffcc;
+    background-color: #111;
+}
+
+/* === BLOQUES DE CÓDIGO (ASTRO SHIKI) === */
+.astro-code {
+    padding: 16px;
+    /* CORRECCIÓN: Más padding para que el código respire (antes 4px era muy poco) */
+    border-radius: 6px;
+    border: 1px solid #333;
+    overflow-x: auto;
+    /* Evita que el código rompa el diseño si la línea es muy larga */
+    margin-bottom: 20px;
+    font-family: monospace;
+}
+.containerpc{
+        text-align: center;
+    }
+/* === RESPONSIVE DESIGN (PC) === */
+@media (min-width: 768px) {
+    header { 
+        flex-direction: row;
+
+    }
+    section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #index-section {
+        grid-template-columns: repeat(2, 1fr);
+        /* Ahora sí se divide en dos en PC */
+    }
+
+    #links,
+    #text {
+        flex: 1;
+        /* Mitad y mitad exactos */
+    }
+
+    #gifdance {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    main {
+        align-items: center;
+        margin: 0 auto;
+        padding:1px;
+    }
+    .containerpc{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+#bocchi-img-cursor{
+    width:240px;
+    
+}
+
+
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+
+  cursor: pointer;
+  z-index: 999;
+}
+
+#scrollTopBtn:hover {
+  background: #acacac;
+}

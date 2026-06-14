@@ -1,0 +1,174 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+// 1. Traemos todos los archivos de la colección "anime"
+const todosLosAnimes = await getCollection("anime");
+
+todosLosAnimes.sort((a, b) => {
+  if (a.id === "higurashi") return -1;
+  if (b.id === "higurashi") return 1;
+  return 0;
+}); // 2. Preparamos los contenidos (sinopsis) para poder renderizarlos
+const animesConContenido = await Promise.all(
+  todosLosAnimes.map(async (anime) => {
+    const { Content } = await render(anime);
+    return { anime, Content };
+  }),
+);
+---
+
+<Layout title="Mi Lista de Animes">
+  <div class="anime-list-container">
+    <h1 class="cyber-title">Favorites Animes</h1>
+    <p class="subtitle">
+      Registros recuperados de MyAnimeList y redes locales.
+    </p>
+
+    <div class="grid-animes">
+      {
+        animesConContenido.map(({ anime, Content }) => (
+          <section class="anime-card">
+            {anime.data.image && (
+              <Image
+                src={anime.data.image}
+                alt={`Portada de ${anime.data.title}`}
+                width={120}
+                height={180}
+                class="anime-cover"
+              />
+            )}
+
+            <header class="card-header">
+              <h2>{anime.data.title}</h2>
+
+              {anime.data.malsId && anime.data.malsId.length > 0 && (
+                <a
+                  href={`https://myanimelist.net/anime/${anime.data.malsId[0]}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mal-badge"
+                >
+                  MAL ID: {anime.data.malsId[0]} 🌐
+                </a>
+              )}
+            </header>
+
+            <div class="anime-tags">
+              {anime.data.tags.map((tag) => (
+                <a href={`/tags/${tag}`} class="anime-tag">#{tag}</a>
+              ))}
+            </div>
+
+            <div class="sinopsis-content">
+              <h4 class="sinopsis-title"> SINOPSIS:
+              </h4>
+              <Content />
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+  <a href="/" class="back-link">Volver al inicio</a>
+</Layout>
+
+<style>
+  /* === ESTILOS CYBERPUNK PARA TU LISTA DE ANIMES === */
+
+
+  .cyber-title {
+    font-family: "Share Tech Mono", monospace;
+    color: #d66060;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.3);
+    font-size: 2rem;
+    margin-bottom: 5px;
+  }
+
+  .subtitle {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    font-family: "Share Tech Mono", monospace;
+  }
+
+ 
+
+  .anime-card {
+    width: 100%;
+    padding:20px;
+  }
+
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .card-header h2 {
+    font-family: "Share Tech Mono", monospace;
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .anime-cover {
+    width: 120px;
+    height: auto;
+  }
+  .mal-badge {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.8rem;
+    color: #ffa77d;
+    border: 1px solid #ffa77d;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  .mal-badge:hover {
+    color: #fff;
+    background-color: #2a1b15;
+    text-shadow: 0 0 5px #ffa77d;
+  }
+
+  .anime-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+  }
+
+  .anime-tag {
+    font-size: 0.75rem;
+    color: #888;
+    background-color: #111;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-family: "Share Tech Mono", monospace;
+  }
+
+  /* BLOQUE DE LA SINOPSIS (Forzamos Arial para lectura cómoda) */
+  .sinopsis-content {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ccc;
+  }
+
+  .sinopsis-title {
+    font-family: "Share Tech Mono", monospace;
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  
+
+  
+
+</style>

@@ -1,0 +1,70 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+---
+
+<Layout title="About Me">
+    <section>
+        <header>
+            <h3>About Me</h3>
+        </header>
+        
+        <div id="text">
+            <p>I started to code when i had 10 years old.</p>
+            <p>My first time with computers where had at this age.</p>
+            <p>
+                My first computer was an ASUS EEE PC 1015PX. Before that, my
+                father's computer was a Compaq Presario and at the very
+                beginning my dad's first computer was a second hand computer, An
+                Fujitsu Siemens SCENIC xB! but i was too yound and i don't have
+                cleary memories, only that It’s just that my dad told me I
+                couldn’t go online because there was no cable—but really, he was
+                just protecting me because he didn’t want me to surf the web (I
+                was 5 or 6 years old).
+            </p>
+            <p>
+                Getting back to the Asus EEE PC—it still works, but barely. The
+                charger broke, the battery had to be replaced, and even though
+                it has an SSD now, I don’t use it anymore because the processor
+                gets really hot, the keyboard has started to malfunction, and
+                the screen is tiny. I have another desktop computer that’s much
+                more powerful.
+            </p>
+            <p style="color:#ebcdf8">
+                My PC version was special it was 2GB of RAM instead 1GB!
+            </p>
+            <div class="containerpc">
+                <div class="card-computer">
+                    <img
+                        src="/img/Fujitsu.jpg"
+                        width="200px"
+                        alt="Fujitsu Siemems xB"
+                    />
+                    <h4>Compaq Presario</h4>
+                </div>
+                <div class="card-computer">
+                    <img
+                        src="/img/compaq.jpg"
+                        width="200px"
+                        alt="Compaq Presario"
+                    />
+                    <h4>Compaq Presario</h4>
+                </div>
+                
+                <div class="card-computer">
+                    <img
+                        src="/img/asus1015px.jpeg"
+                        width="200px"
+                        alt="Asus 1015PX"
+                    />
+                    <h4>Asus EEE PC 1015PX</h4>
+                </div>
+            </div>
+            <header>
+                <h3>My current PC</h3>
+            </header>
+            <p></p>
+        </div>
+    </section>
+    <a href="/" class="back-link">Volver al inicio</a>
+</Layout>

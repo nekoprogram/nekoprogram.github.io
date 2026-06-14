@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<Layout>
+    <section>
+        <header>
+            <h1>Blog</h1>
+        </header>
+        <section id="blog-section">
+            <ul>
+                {
+                    sortedPosts.length === 0 ? (
+                        <li style="color: #888; list-style: none; padding-left: 0;">
+                            No posts yet...
+                        </li>
+                    ) : (
+                        sortedPosts.map((post) => (
+                            <li style="margin-bottom: 15px;">
+                                <a href={`/blog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                                <span style="font-size: 0.8em; color: #888; display: block; margin-bottom: 4px;">
+                                    {post.data.date.toLocaleDateString(
+                                        "es-ES",
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </span>
+
+                                <div class="tag-container">
+                                    {post.data.tags.map((tag) => (
+                                        <a href={`/tags/${tag}`} class="tag">
+                                            #{tag}
+                                        </a>
+                                    ))}
+                                </div>
+                            </li>
+                        ))
+                    )
+                }
+            </ul>
+        </section>
+
+        <a href="/" class="back-link">Volver al inicio</a>
+    </section>
+</Layout>

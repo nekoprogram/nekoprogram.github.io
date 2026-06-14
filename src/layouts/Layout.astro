@@ -1,0 +1,88 @@
+---
+// src/layouts/Layout.astro
+import "../styles/styles.css";
+import { ClientRouter } from "astro:transitions";
+const currentYear = new Date().getFullYear();
+import ScrollTopButton from "../components/ScrollTop.astro";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nekoprogram GitHub Page</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+            rel="stylesheet"
+        />
+
+        <link
+            rel="shortcut icon"
+            href="/img/nekoprogram.jpeg"
+            type="image/x-icon"
+        />
+
+        <link href="https://nekoprogram.nekoweb.org/" rel="me" />
+        <link href="https://nekoprogram.neocities.org/" rel="me" />
+        <link href="https://misskey.social/@Mekoprogram" rel="me" />
+        <link href="https://tkz.one/@nekoprogram" rel="me" />
+        <link href="https://dill.burggit.moe/@nekoprogram" rel="me" />
+
+        <ClientRouter />
+    </head>
+    <body>
+        <main class="share-tech-mono-regular">
+            <header>
+                <div id="title-container">
+                    <h1>Nekoprogram</h1>
+                    <h4>GitHub.io Page</h4>
+                    <p style="font-size: 0.8em; color: #ebcdf8;">
+                        I can't use nekoweb to verify me in nostr. verification
+                        in nostr is using this github.io page
+                    </p>
+                    <p class="main-site-notice">
+                        Main website: <a
+                            id="nekoweb-link"
+                            href="https://nekoprogram.nekoweb.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >nekoprogram.nekoweb.org 🌐</a
+                        >
+                        Also in <a
+                            id="neocities-link"
+                            href="https://nekoprogram.neocities.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >nekoprogram.neocities.org 🌐</a
+                        >
+                    </p>
+                </div>
+
+                <img
+                    src="/img/nekoprogram.jpeg"
+                    alt="My image. A girl with a pink Kigurumi with a soda in front on her computer. The girl is from Needy Girl Overdose named Ame-chan or K-Angel"
+                />
+            </header>
+
+            <slot />
+           
+            <footer>
+                <p>
+                    &copy; Nekoprogram <span
+                        >{currentYear} All rights reserved.
+                    </span>
+                </p>
+                <p>
+                    All anime images belong to their respective owners and
+                    copyright holders and are used for informational and
+                    fan-related purposes only.
+                </p>
+            </footer>
+        </main>
+         <ScrollTopButton />
+    </body>
+</html>

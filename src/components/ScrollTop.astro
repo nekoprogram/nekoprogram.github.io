@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button id="scrollTopBtn" aria-label="Ir arriba">
+  <Icon  name="tabler:arrow-up" class="black-arrow"/>
+</button>
+
+<script is:inline>
+  function initScrollTop() {
+    const btn = document.getElementById("scrollTopBtn");
+    if (!btn) return;
+
+    // limpiar duplicados (MUY IMPORTANTE en SPA)
+    window.onscroll = null;
+    btn.onclick = null;
+
+    window.addEventListener("scroll", () => {
+      btn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+
+    btn.onclick = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  }
+
+  // 👇 CLAVE PARA ASTRO TRANSITIONS
+  document.addEventListener("astro:page-load", initScrollTop);
+
+  // también para el primer load
+  initScrollTop();
+</script>

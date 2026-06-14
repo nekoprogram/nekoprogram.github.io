@@ -1,0 +1,133 @@
+---
+// src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+// 1. Importamos la función nativa de Astro para traer las colecciones
+import { getCollection } from "astro:content";
+
+// 2. Traemos todos los posts de la colección 'blog'
+const posts = await getCollection("blog");
+
+// 3. Los ordenamos por fecha (el más reciente primero)
+const sortedPosts = posts.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+import IconoNostr from "../../public/gemini-svg.svg";
+---
+
+<Layout>
+    <section id="index-section">
+        <div id="blog-section">
+            <h3 style="margin-top: 20px;">Blog Posts</h3>
+            <ul>
+                {
+                    sortedPosts.length === 0 ? (
+                        <li style="color: #888; list-style: none; padding-left: 0;">
+                            No posts yet...
+                        </li>
+                    ) : (
+                        sortedPosts.slice(0, 5).map((post) => (
+                            <li style="margin-bottom: 15px;">
+                                <a href={`/blog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                                <span style="font-size: 0.8em; color: #888; display: block; margin-bottom: 4px;">
+                                    {post.data.date.toLocaleDateString(
+                                        "es-ES",
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </span>
+
+                                <div class="tag-container">
+                                    {post.data.tags.map((tag) => (
+                                        <a href={`/tags/${tag}`} class="tag">
+                                            #{tag}
+                                        </a>
+                                    ))}
+                                </div>
+                            </li>
+                        ))
+                    )
+                }
+            </ul>
+            <a href="/blog">More</a>
+        </div>
+        <section id="links">
+            <div id="text">
+                <h3>Welcome to my Github.io</h3>
+                <i>A cyber cat Nyan &gt;.&lt;</i>
+                <a href="/about">About Me</a>
+                <h3>Links</h3>
+                <ul>
+                    <li>
+                        <a
+                            href="https://misskey.social/@Mekoprogram"
+                            target="_blank"
+                        >
+                            <Icon
+                                name="simple-icons:misskey"
+                                style="width: 20px; vertical-align: middle; margin-right: 5px;"
+                            />
+                            Misskey
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://dill.burggit.moe/@nekoprogram"
+                            target="_blank"
+                        >
+                            <Icon
+                                name="simple-icons:misskey"
+                                style="width: 20px; vertical-align: middle; margin-right: 5px;"
+                            />
+                            Burggit (Alt. Misskey Fork of Misskey)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://tkz.one/@nekoprogram" target="_blank">
+                            <Icon
+                                name="simple-icons:mastodon"
+                                style="width: 20px; vertical-align: middle; margin-right: 5px;"
+                            />
+                            Mastodon (Spanish Only)
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://bsky.app/profile/did:plc:osxkkjbh7ownrbtkoo2lqlmf"
+                            target="_blank"
+                        >
+                            <Icon
+                                name="simple-icons:bluesky"
+                                style="width: 20px; vertical-align: middle; margin-right: 5px;"
+                            />
+                            Bluesky
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://primal.net/p/nprofile1qqsrwj4q6yzk66rtkdpkvnd9ssvfg4zmemdqte8qeqr4x35t75kf30sxr73pg"
+                            target="_blank"
+                        >
+                            <IconoNostr
+                                width="24"
+                                height="24"
+                                class="mi-clase-nostr"
+                                color={"#d66060"}
+                            />Nostr
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <section>
+                <h3>Favorites Animes</h3>
+                <p>See <a href="animes">animes page</a></p>
+            </section>
+        </section>
+    </section>
+</Layout>
