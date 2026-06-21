@@ -9,6 +9,10 @@ const currentYear = new Date().getFullYear();
 // 1. Detectamos el idioma actual de la URL automáticamente gracias a Astro
 const lang = Astro.currentLocale || "en"; 
 
+// 🚀 CAPTURAMOS EL CREADOR DEL FEDIVERSO (si no hay ninguno en el Markdown, usa el tuyo)
+const { frontmatter } = Astro.props;
+const fediverseCreator = frontmatter?.fediverseCreator || "@nekoprogram@tkz.one";
+
 // 2. Definimos los textos para cada idioma
 const translations = {
     en: {
@@ -39,12 +43,15 @@ const t = translations[lang as keyof typeof translations] || translations.en;
 ---
 
 <!doctype html>
-<!-- Cambiamos lang="es" por el idioma dinámico -->
-<html>
+<!-- 🌐 Cambiamos lang="es" por el idioma dinámico (¡Muy importante para SEO e i18n!) -->
+<html lang={lang}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nekoprogram GitHub Page</title>
+        <title>{frontmatter?.title || "Nekoprogram GitHub Page"}</title>
+
+        <!-- 🚀 TU ETIQUETA DEL FEDIVERSO AQUÍ -->
+        <meta name="fediverse:creator" content={fediverseCreator} />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
