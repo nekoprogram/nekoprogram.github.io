@@ -5,6 +5,7 @@ date: 2026-06-21
 tags: ["anime", "higurashi", "news"]
 lang: "ja"
 fediverseCreator: "@nekoprogram@tkz.one"
+coverImage: "/Higurashi_2026.webp" 
 ---
 ミステリーとホラーのファンに朗報です！「ひぐらしのなく頃に」の新作アニメプロジェクト
 ![Visual oficial del nuevo anime de Higurashi](./Higurashi_2026.webp)

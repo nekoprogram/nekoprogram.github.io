@@ -7,35 +7,40 @@ import ScrollTopButton from "../components/ScrollTop.astro";
 const currentYear = new Date().getFullYear();
 
 // 1. Detectamos el idioma actual de la URL automáticamente gracias a Astro
-const lang = Astro.currentLocale || "en"; 
+const lang = Astro.currentLocale || "en";
 
 // 🚀 CAPTURAMOS EL CREADOR DEL FEDIVERSO (si no hay ninguno en el Markdown, usa el tuyo)
 const { frontmatter } = Astro.props;
-const fediverseCreator = frontmatter?.fediverseCreator || "@nekoprogram@tkz.one";
+const fediverseCreator =
+    frontmatter?.fediverseCreator || "@nekoprogram@tkz.one";
 
+const pageImage = frontmatter?.coverImage || "/img/nekoprogram.jpeg";
 // 2. Definimos los textos para cada idioma
 const translations = {
     en: {
         nostr: "I can't use nekoweb to verify me in nostr. Verification in nostr is using this github.io page.",
         mainSite: "Main website:",
         rights: "All rights reserved.",
-        copyrightNotice: "All anime images belong to their respective owners and copyright holders and are used for informational and fan-related purposes only.",
-        alsoIn: "Also in"
+        copyrightNotice:
+            "All anime images belong to their respective owners and copyright holders and are used for informational and fan-related purposes only.",
+        alsoIn: "Also in",
     },
     es: {
         nostr: "No puedo usar nekoweb para verificarme en nostr. La verificación en nostr usa esta página de github.io.",
         mainSite: "Sitio web principal:",
         rights: "Todos los derechos reservados.",
-        copyrightNotice: "Todas las imágenes de anime pertenecen a sus respectivos dueños y titulares de derechos de autor y se utilizan únicamente con fines informativos y relacionados con fans.",
-        alsoIn:"También en"
+        copyrightNotice:
+            "Todas las imágenes de anime pertenecen a sus respectivos dueños y titulares de derechos de autor y se utilizan únicamente con fines informativos y relacionados con fans.",
+        alsoIn: "También en",
     },
     ja: {
         nostr: "Nostrでの認証にnekowebが使えないため、このgithub.ioページを使用しています。",
         mainSite: "メインウェブサイト:",
         rights: "All rights reserved.",
-        copyrightNotice: "すべてのアニメ画像はそれぞれの所有者および著作権者に帰属し、情報提供およびファン関連の目的のみに使用されます。",
-        alsoIn:"また、"
-    }
+        copyrightNotice:
+            "すべてのアニメ画像はそれぞれの所有者および著作権者に帰属し、情報提供およびファン関連の目的のみに使用されます。",
+        alsoIn: "また、",
+    },
 };
 
 // 3. Elegimos el texto correcto según el idioma actual
@@ -71,7 +76,22 @@ const t = translations[lang as keyof typeof translations] || translations.en;
         <link href="https://misskey.social/@Mekoprogram" rel="me" />
         <link href="https://tkz.one/@nekoprogram" rel="me" />
         <link href="https://dill.burggit.moe/@nekoprogram" rel="me" />
+        <meta
+            property="og:title"
+            content={frontmatter?.title || "Nekoprogram GitHub Page"}
+        />
+        <meta
+            property="og:description"
+            content={frontmatter?.description || "Nekoprogram Personal Blog"}
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={Astro.url} />
 
+        <meta
+            property="og:image"
+            content={new URL(pageImage, Astro.site)}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
         <ClientRouter />
     </head>
     <body>
@@ -81,17 +101,20 @@ const t = translations[lang as keyof typeof translations] || translations.en;
                     <h1>Nekoprogram</h1>
                     <h4>GitHub.io Page</h4>
                     <p style="font-size: 0.8em; color: #ebcdf8;">
-                        {t.nostr} <!-- Texto dinámico -->
+                        {t.nostr}
+                        <!-- Texto dinámico -->
                     </p>
                     <p class="main-site-notice">
-                        {t.mainSite} <a
+                        {t.mainSite}
+                        <a
                             id="nekoweb-link"
                             href="https://nekoprogram.nekoweb.org"
                             target="_blank"
                             rel="noopener noreferrer"
                             >nekoprogram.nekoweb.org 🌐</a
                         >
-                        {t.alsoIn} <a
+                        {t.alsoIn}
+                        <a
                             id="neocities-link"
                             href="https://nekoprogram.neocities.org"
                             target="_blank"
@@ -108,16 +131,18 @@ const t = translations[lang as keyof typeof translations] || translations.en;
             </header>
 
             <slot />
-           
+
             <footer>
                 <p>
-                    &copy; Nekoprogram <span>{currentYear} {t.rights}</span> <!-- Texto dinámico -->
+                    &copy; Nekoprogram <span>{currentYear} {t.rights}</span>
+                    <!-- Texto dinámico -->
                 </p>
                 <p>
-                    {t.copyrightNotice} <!-- Texto dinámico -->
+                    {t.copyrightNotice}
+                    <!-- Texto dinámico -->
                 </p>
             </footer>
         </main>
-         <ScrollTopButton />
+        <ScrollTopButton />
     </body>
 </html>
