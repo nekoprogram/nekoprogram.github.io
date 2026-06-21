@@ -1,0 +1,122 @@
+---
+// src/pages/[lang]/animes/index.astro
+import type { GetStaticPaths } from "astro";
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+// 1. OBLIGATORIO: Generamos las rutas físicas para los tres idiomas soportados
+export function getStaticPaths() {
+    return [
+        { params: { lang: "es" } },
+        { params: { lang: "en" } },
+        { params: { lang: "ja" } },
+    ];
+}
+
+const { lang } = Astro.params;
+
+// 2. Traemos la base de datos cruda de la colección 'anime'
+const todosLosAnimes = await getCollection("anime");
+
+// 3. FILTRADO: Filtramos los animes para que correspondan únicamente al idioma de la URL
+const animesFiltrados = todosLosAnimes.filter((anime) => {
+    const animeLang = anime.data.lang || 'en'; // Si no tiene lang configurado, por defecto es inglés
+    return animeLang === lang;
+});
+
+// 4. ORDENAMIENTO: Mantenemos a Higurashi en primer lugar (usando startsWith por si tiene sufijos como -es o -en)
+animesFiltrados.sort(
+    (a: CollectionEntry<"anime">, b: CollectionEntry<"anime">) => {
+        if (a.id.startsWith("higurashi")) return -1;
+        if (b.id.startsWith("higurashi")) return 1;
+        return 0;
+    },
+);
+
+// 5. PROCESAMIENTO: Renderizamos el Markdown únicamente de los animes filtrados
+const animesConContenido = await Promise.all(
+    animesFiltrados.map(async (anime: CollectionEntry<"anime">) => {
+        const { Content } = await render(anime);
+        return { anime, Content };
+    }),
+);
+
+// 6. DICCIONARIO DE TRADUCCIONES: Textos de la interfaz según el idioma actual
+const ui = {
+    es: {
+        title: "Mis Animes Favoritos",
+        subtitle: "Registros recuperados de MyAnimeList y redes locales.",
+        back: "Volver al inicio",
+    },
+    en: {
+        title: "Favorite Animes",
+        subtitle: "Records retrieved from MyAnimeList and local networks.",
+        back: "Back to home",
+    },
+    ja: {
+        title: "お気に入りのアニメ",
+        subtitle: "MyAnimeListおよびローカルネットワークから取得されたレコード。",
+        back: "ホームに戻る",
+    },
+};
+
+const t = ui[lang as keyof typeof ui] || ui.en;
+---
+
+<Layout title={t.title}>
+    <div class="anime-list-container">
+        <h1 class="cyber-title">{t.title}</h1>
+        <p class="subtitle">{t.subtitle}</p>
+
+        <div class="grid-animes">
+            {
+                animesConContenido.map(({ anime, Content }) => (
+                    <section class="anime-card">
+                        {/* Usamos el componente <Image /> nativo de Astro para procesar los assets locales */}
+                        {anime.data.image && (
+                            <Image
+                                src={anime.data.image}
+                                alt={`Portada de ${anime.data.title}`}
+                                width={120}
+                                height={180}
+                                class="anime-cover"
+                            />
+                        )}
+                        <header class="card-header">
+                            <h2>{anime.data.title}</h2>
+                            {anime.data.malsId &&
+                                anime.data.malsId.length > 0 && (
+                                    <a
+                                        href={`https://myanimelist.net/anime/${anime.data.malsId[0]}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="mal-badge"
+                                    >
+                                        MAL ID: {anime.data.malsId[0]} 🌐
+                                    </a>
+                                )}
+                        </header>
+
+                        <div class="anime-tags">
+                            {anime.data.tags.map((tag: string) => (
+                                <a
+                                    href={`/${lang}/tags/${tag}`}
+                                    class="anime-tag"
+                                >
+                                    #{tag}
+                                </a>
+                            ))}
+                        </div>
+
+                        <div class="sinopsis-content">
+                            <h4 class="sinopsis-title"> SINOPSIS: </h4>
+                            <Content />
+                        </div>
+                    </section>
+                ))
+            }
+        </div>
+    </div>
+    <a href={`/${lang}/`} class="back-link">{t.back}</a>
+</Layout>

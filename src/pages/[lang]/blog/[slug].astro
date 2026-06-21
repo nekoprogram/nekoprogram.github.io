@@ -1,0 +1,97 @@
+---
+// src/pages/[lang]/blog/[slug].astro
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  
+  return blogEntries.map(entry => {
+    const postLang = entry.data.lang || 'en'; 
+    
+    return {
+      params: { 
+        lang: postLang,
+        slug: entry.id
+      }, 
+      props: { entry },
+    };
+  });
+}
+
+// 1. Recuperamos el lang actual de los parámetros de la URL
+const { lang } = Astro.params;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// 2. Traducciones básicas para el botón de regresar
+const ui = {
+  es: { back: "Volver al inicio", format: "es-ES" },
+  en: { back: "Back to Home", format: "en-US" },
+  ja: { back: "ホームに戻る", format: "ja-JP" }
+};
+const t = ui[lang as keyof typeof ui] || ui.en;
+---
+
+<Layout title={entry.data.title}>
+  <article>
+    <!-- Corregido: Ahora vuelve al inicio localizado de su propio idioma sin disparar el refresh duro -->
+    <a href={`/${lang}/`} class="back-link">
+      <svg
+        style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      {t.back}
+    </a>
+
+    <h1>{entry.data.title}</h1>
+    
+    <p class="fecha">
+      {
+        entry.data.date.toLocaleDateString(t.format, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      }
+    </p>
+
+    <!-- Corregido: Las etiquetas ahora apuntan a la ruta localizada /[lang]/tags/... -->
+    <div class="tag-container" style="margin-top: 12px;">
+      {entry.data.tags.map((tag: string) => (
+        <a href={`/${lang}/tags/${tag}`} class="tag">#{tag}</a>
+      ))}
+    </div>
+
+    <hr />
+
+    <div class="markdown-content">
+      <Content />
+    </div>
+  </article>
+
+   <!-- Corregido abajo también -->
+   <a href={`/${lang}/`} class="back-link">
+      <svg
+        style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      {t.back}
+    </a>
+</Layout>

@@ -3,6 +3,7 @@ title: "Cómo convertir cursores de Windows (.ani) a Linux (Mint/Ubuntu/Debian)"
 date: 2024-09-10
 description: "Aprendiendo Astro desde cero para hacer un blog cyberpunk."
 tags: ["wordpress", "migrated","legacy"]
+lang: "es"
 ---
 <img id="bocchi-img-cursor" src="/img/bocchi_cursor.png" alt="Imagen de un cursor de Bocchi" />
 

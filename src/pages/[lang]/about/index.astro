@@ -1,12 +1,33 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+// src/pages/[lang]/about/index.astro
+import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+
+// 1. OBLIGATORIO: Le decimos a Astro que genere esta página para los 3 idiomas
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'ja' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+// 2. Traducciones rápidas para la interfaz básica
+const ui = {
+    es: { title: "Sobre Mí", back: "Volver al inicio" },
+    en: { title: "About Me", back: "Back to home" },
+    ja: { title: "私について", back: "ホームに戻る" }
+};
+
+const t = ui[lang as keyof typeof ui] || ui.en;
 ---
 
-<Layout title="About Me">
+<Layout title={t.title}>
     <section>
         <header>
-            <h3>About Me</h3>
+            <h3>{t.title}</h3>
         </header>
 
         <div id="text">
@@ -70,8 +91,8 @@ import { Image } from "astro:assets";
                 <h3>My current PC</h3>
             </header>
             <table>
-                <tbody
-                    ><tr>
+                <tbody>
+                    <tr>
                         <th>Component Name</th>
                         <th>Value</th>
                     </tr>
@@ -93,9 +114,7 @@ import { Image } from "astro:assets";
                     </tr>
                     <tr>
                         <td>OS</td>
-                        <td
-                            >Linux Mint Cinnammon 22.2 / Windows 11 (Dual Boot)</td
-                        >
+                        <td>Linux Mint Cinnammon 22.2 / Windows 11 (Dual Boot)</td>
                     </tr>
                     <tr>
                         <td>PC CASE</td>
@@ -104,23 +123,20 @@ import { Image } from "astro:assets";
                 </tbody>
             </table>
             <div>
-                  <p>
-                My old first-generation <strong>Ryzen 1700 </strong>—one of the
-                first models released— retired not long ago (2026-06-06) (2017–2026) 
-            </p>
-            <img src="img/cpu_changed_1700_5700x.webp" alt="A terminal showing CPU change">
-            
+                <p>
+                    My old first-generation <strong>Ryzen 1700 </strong>—one of the
+                    first models released— retired not long ago (2026-06-06) (2017–2026) 
+                </p>
+                {/* Añadida la barra / inicial para que cargue desde public */}
+                <img src="/img/cpu_changed_1700_5700x.webp" alt="A terminal showing CPU change">
             </div>
-            <i
-                >Sleep peacefully, my most beloved CPU, 1700 (🦋<i
-                    style="color:red"
-                    >Yes its an <a
-                        href="https://en.wikipedia.org/wiki/Umineko_When_They_Cry"
-                        target="_blank">Umineko</a
-                    > ref</i
-                >🦋)</i
-            >
+            <i>
+                Sleep peacefully, my most beloved CPU, 1700 (🦋<i style="color:red">
+                    Yes its an <a href="https://en.wikipedia.org/wiki/Umineko_When_They_Cry" target="_blank">Umineko</a> ref
+                </i>🦋)
+            </i>
         </div>
     </section>
-    <a href="/" class="back-link">Volver al inicio</a>
+    {/* Enlace dinámico con el idioma actual */}
+    <a href={`/${lang}/`} class="back-link">{t.back}</a>
 </Layout>

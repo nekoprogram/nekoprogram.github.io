@@ -1,0 +1,59 @@
+---
+// src/pages/[lang]/animes/[id].astro
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content'; // <-- Importamos CollectionEntry
+
+// 1. Le decimos a Astro qué páginas de anime existen en tu carpeta content y en qué idiomas
+export async function getStaticPaths() {
+  const animeEntries = await getCollection('anime');
+  
+  return animeEntries.map((entry: CollectionEntry<'anime'>) => {
+    // Buscamos el idioma del archivo (por defecto 'en' si no tiene)
+    const animeLang = entry.data.lang || 'es';
+    
+    return {
+      params: { 
+        lang: animeLang, // <-- ¡OBLIGATORIO! Faltaba este parámetro por la carpeta [lang]
+        id: entry.id 
+      },
+      props: { entry },
+    };
+  });
+}
+
+// Declaramos la interfaz para que Astro sepa qué tipo de props recibe la página
+interface Props {
+  entry: CollectionEntry<'anime'>;
+}
+
+// 2. Recuperamos los datos del anime que el usuario ha clicado con su tipo correcto
+const { entry } = Astro.props as Props;
+const { lang } = Astro.params;
+const { Content } = await render(entry); // Convierte el Markdown en HTML funcional
+---
+
+<Layout title={entry.data.title}>
+  <article style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <a href={`/${lang}/animes`} style="display: inline-flex; align-items: center; text-decoration: none; color: #888; margin-bottom: 20px;">
+      ← Back to Animes
+    </a>
+
+    <h1>{entry.data.title}</h1>
+    
+    {/* Pintamos las etiquetas del anime si las tiene configuradas */}
+    {entry.data.tags && (
+      <div class="tag-container" style="margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
+        {entry.data.tags.map((tag: string) => ( // <-- Tipamos el tag como 'string'
+          // Enlace de etiquetas corregido con el idioma dinámico
+          <a href={`/${lang}/tags/${tag}`} style="padding: 4px 8px; background: #222; border-radius: 4px; text-decoration: none; color: #eee; font-size: 0.9em;">
+            #{tag}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <div class="markdown-content">
+      <Content />
+    </div>
+  </article>
+</Layout>

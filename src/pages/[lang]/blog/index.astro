@@ -1,0 +1,85 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+// 1. Le decimos a Astro que esta lista existe para los 3 idiomas
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'ja' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+// 2. Traemos todos los posts de la colección 'blog'
+const allPosts = await getCollection('blog');
+
+// 3. Filtramos por idioma y ordenamos por fecha de una vez (si tienes la propiedad 'date')
+const filteredPosts = allPosts
+  .filter(post => {
+    const postLang = post.data.lang || 'en';
+    return postLang === lang;
+  })
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()); // Los más nuevos primero
+
+// 4. Tus traducciones específicas para esta página de listado
+const ui = {
+  es: { title: "Mi Blog", noPosts: "No hay publicaciones aún...", back: "Volver al inicio", dateFormat: "es-ES" },
+  en: { title: "My Blog", noPosts: "No posts yet...", back: "Back to home", dateFormat: "en-US" },
+  ja: { title: "ブログ", noPosts: "まだ投稿はありません...", back: "ホームに戻る", dateFormat: "ja-JP" }
+};
+
+const t = ui[lang as keyof typeof ui] || ui.en;
+---
+
+<Layout title={t.title}>
+    <section>
+        <header>
+            <h1>{t.title}</h1>
+        </header>
+        <section id="blog-section">
+            <ul>
+                {
+                    // Cambiado de sortedPosts a filteredPosts
+                    filteredPosts.length === 0 ? (
+                        <li style="color: #888; list-style: none; padding-left: 0;">
+                            {t.noPosts}
+                        </li>
+                    ) : (
+                        filteredPosts.map((post) => (
+                            <li style="margin-bottom: 15px;">
+                                {/* Enlace dinámico con el idioma actual: /es/blog/id */}
+                                <a href={`/${lang}/blog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                                <span style="font-size: 0.8em; color: #888; display: block; margin-bottom: 4px;">
+                                    {post.data.date.toLocaleDateString(
+                                        t.dateFormat, // Formato de fecha dinámico según el idioma
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </span>
+
+                                <div class="tag-container">
+                                    {post.data.tags.map((tag) => (
+                                        // Las etiquetas también irán al idioma correspondiente más adelante
+                                        <a href={`/${lang}/tags/${tag}`} class="tag">
+                                            #{tag}
+                                        </a>
+                                    ))}
+                                </div>
+                            </li>
+                        ))
+                    )
+                }
+            </ul>
+        </section>
+
+        <a href={`/${lang}/`} class="back-link">{t.back}</a>
+    </section>
+</Layout>

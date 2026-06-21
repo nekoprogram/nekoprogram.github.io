@@ -1,9 +1,10 @@
 ---
 title: "Higurashi No Naku Koro Ni"
-tags: ["terror", "gore", "misterio"]
+tags: ["terror", "gore", "mistery"]
 malsId: [934]
 image: "../../assets/anime/higurashi_cover.jpg"
 order: 1
+lang: "en"
 ---
 
 The series focuses on a group of young friends living in a fictional village and the strange events that occur there in 1983.

@@ -11,6 +11,7 @@ const blogCollection = defineCollection({
     date: z.coerce.date(), // 'coerce' transforma texto "2026-06-13" en un objeto Date real de JS
     description: z.string(),
     tags: z.array(z.string()),
+    lang: z.string()
   }),
 });
 const animeCollection = defineCollection({
@@ -22,6 +23,7 @@ const animeCollection = defineCollection({
     malsId: z.array(z.number()),
     // 👇 Ahora sí, validamos la imagen local de forma correcta en Astro
     image: image().optional(), 
+    lang: z.string(),
   }),
 });
 export const collections = {
