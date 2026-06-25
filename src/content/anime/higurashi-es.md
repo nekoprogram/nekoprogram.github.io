@@ -23,5 +23,3 @@ Pero a medida que va conociendo mejor la historia y las tradiciones del pueblo, 
     4. Higurashi No Naku Koro Ni GOU (Año de estreno: 2020)
     5. Higurashi No Naku Koro Ni SOTSU (Año de estreno: 2021)
 
-
-Traducción realizada con la versión gratuita del traductor DeepL.com
