@@ -4,6 +4,7 @@ date: 2026-06-10
 description: "Learning Astro from scratch to make a  cyberpunk blog."
 tags: ["astro", "web","first-post"]
 lang: "en"
+atUri: "at://did:plc:osxkkjbh7ownrbtkoo2lqlmf/site.standard.document/3mqf6t3ipe526"
 ---
 
 # Hello World!
