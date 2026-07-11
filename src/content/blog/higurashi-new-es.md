@@ -5,7 +5,8 @@ date: 2026-06-21
 tags: ["anime", "higurashi", "news"]
 lang: "es"
 fediverseCreator: "@nekoprogram@tkz.one"
-coverImage: "/Higurashi_2026.webp" 
+coverImage: "/Higurashi_2026.webp"
+draft: true 
 ---
 ¡Grandes noticias para los fans del misterio y el horror! Se ha anunciado oficialmente una nueva producción...
 ![Visual oficial del nuevo anime de Higurashi](./Higurashi_2026.webp)
