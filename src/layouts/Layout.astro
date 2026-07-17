@@ -9,15 +9,10 @@ const currentYear = new Date().getFullYear();
 // 1. Detectamos el idioma actual de la URL automáticamente gracias a Astro
 const lang = Astro.currentLocale || "en";
 
-// 🚀 CAPTURAMOS EL CREADOR DEL FEDIVERSO (si no hay ninguno en el Markdown, usa el tuyo)
-const { frontmatter } = Astro.props;
-const entry = Astro.props.entry as any; // El "as any" silencia a TypeScript temporalmente
-const atUri = frontmatter?.at_uri || entry?.data?.at_uri;
-
+ const { frontmatter, entry } = Astro.props;
+const atUri = frontmatter?.atUri || entry?.data?.atUri;
 const fediverseCreator =
     frontmatter?.fediverseCreator || "@nekoprogram@tkz.one";
-
-
 const pageImage = frontmatter?.coverImage || "/img/nekoprogram.jpeg";
 // 2. Definimos los textos para cada idioma
 const translations = {
@@ -59,12 +54,10 @@ const t = translations[lang as keyof typeof translations] || translations.en;
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{frontmatter?.title || "Nekoprogram Blog"}</title>
 
-        <!-- 🚀 TU ETIQUETA DEL FEDIVERSO AQUÍ -->
+        <!-- ETIQUETA DEL FEDIVERSO -->
         <meta name="fediverse:creator" content={fediverseCreator} />
-        
+        <!--  ETIQUETA DE BLUESKY DEFINITIVA (¡Añade esta línea!) -->
         {atUri && <link rel="site.standard.document" href={atUri} />}
-
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link

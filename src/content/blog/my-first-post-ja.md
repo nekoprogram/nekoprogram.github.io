@@ -4,7 +4,7 @@ date: 2026-06-10
 description: "サイバーパンクなブログを作るために、Astroを一から学ぶ"
 tags: ["astro", "web","first-post"]
 lang: "ja"
-draft: true
+atUri: "at://did:plc:osxkkjbh7ownrbtkoo2lqlmf/site.standard.document/3mqu2a3ym5w2h"
 ---
 
 # こんにちは、世界！ (Hello World!)

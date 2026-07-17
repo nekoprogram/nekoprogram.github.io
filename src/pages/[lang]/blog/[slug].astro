@@ -33,7 +33,20 @@ const ui = {
 const t = ui[lang as keyof typeof ui] || ui.en;
 ---
 
-<Layout title={entry.data.title} frontmatter={{ ...entry.data }}>
+<Layout title={entry.data.title} entry={entry}>
+ 
+<!-- 🎯 ¡AHORA SÍ CON LA VARIABLE CORRECTA! -->
+  <!-- Cambia la etiqueta <link> por esto: -->
+{entry.data.atUri && (
+  <meta property="site.standard.document" content={entry.data.atUri} />
+  <script is:inline define:vars={{ atUri: entry.data.atUri }}>
+    // Esto fuerza a Astro a meter la etiqueta directamente en el HTML en tiempo de compilación
+    const link = document.createElement('link');
+    link.rel = 'site.standard.document';
+    link.href = atUri;
+    document.head.appendChild(link);
+  </script>
+)}
   <article>
     <!-- Corregido: Ahora vuelve al inicio localizado de su propio idioma sin disparar el refresh duro -->
     <a href={`/${lang}/`} class="back-link">

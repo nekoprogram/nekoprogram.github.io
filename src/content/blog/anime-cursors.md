@@ -4,7 +4,7 @@ date: 2024-09-10
 description: "Aprendiendo Astro desde cero para hacer un blog cyberpunk."
 tags: ["wordpress", "migrated","legacy"]
 lang: "es"
-draft: true
+atUri: "at://did:plc:osxkkjbh7ownrbtkoo2lqlmf/site.standard.document/3mqu2a4evr72w"
 ---
 <img id="bocchi-img-cursor" src="/img/bocchi_cursor.png" alt="Imagen de un cursor de Bocchi" />
 
