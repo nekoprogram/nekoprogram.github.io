@@ -33,7 +33,7 @@ const ui = {
 const t = ui[lang as keyof typeof ui] || ui.en;
 ---
 
-<Layout title={entry.data.title}>
+<Layout title={entry.data.title} frontmatter={{ ...entry.data }}>
   <article>
     <!-- Corregido: Ahora vuelve al inicio localizado de su propio idioma sin disparar el refresh duro -->
     <a href={`/${lang}/`} class="back-link">

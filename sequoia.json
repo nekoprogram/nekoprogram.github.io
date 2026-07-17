@@ -1,14 +1,22 @@
 {
   "$schema": "https://tangled.org/stevedylan.dev/sequoia/raw/main/sequoia.schema.json",
-  "siteUrl": "https://nekoprogram.github.io/",
+  "siteUrl": "https://nekoprogram.github.io",
   "contentDir": "./src/content/blog",
   "imagesDir": "./public/img",
   "outputDir": "./dist",
-  "pathPrefix": "/blog",
   "publicationUri": "at://did:plc:osxkkjbh7ownrbtkoo2lqlmf/site.standard.publication/3mqf636aild2y",
   "frontmatter": {
     "publishDate": "date",
     "coverImage": "image"
   },
-  "publishContent": true
+  "publishContent": true,
+  "urlMap": {
+    "my-first-post": "/en/blog/primer-post",
+    "my-first-post-es": "/es/blog/primer-post",
+    "my-first-post-ja": "/ja/blog/primer-post",
+    "higurashi-new": "/en/blog/higurashi-new",
+    "higurashi-new-es": "/es/blog/higurashi-new",
+    "higurashi-new-ja": "/ja/blog/higurashi-new",
+    "anime-cursors": "/en/blog/anime-cursors"
+  }
 }

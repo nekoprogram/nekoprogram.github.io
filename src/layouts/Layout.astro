@@ -11,8 +11,12 @@ const lang = Astro.currentLocale || "en";
 
 // 🚀 CAPTURAMOS EL CREADOR DEL FEDIVERSO (si no hay ninguno en el Markdown, usa el tuyo)
 const { frontmatter } = Astro.props;
+const entry = Astro.props.entry as any; // El "as any" silencia a TypeScript temporalmente
+const atUri = frontmatter?.at_uri || entry?.data?.at_uri;
+
 const fediverseCreator =
     frontmatter?.fediverseCreator || "@nekoprogram@tkz.one";
+
 
 const pageImage = frontmatter?.coverImage || "/img/nekoprogram.jpeg";
 // 2. Definimos los textos para cada idioma
@@ -57,6 +61,9 @@ const t = translations[lang as keyof typeof translations] || translations.en;
 
         <!-- 🚀 TU ETIQUETA DEL FEDIVERSO AQUÍ -->
         <meta name="fediverse:creator" content={fediverseCreator} />
+        
+        {atUri && <link rel="site.standard.document" href={atUri} />}
+
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
