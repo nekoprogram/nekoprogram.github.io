@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sequoia:publish": "sequoia publish"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -18,5 +19,8 @@
     "astro": "^6.4.4",
     "astro-icon": "^1.1.5",
     "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "sequoia-cli": "^0.5.6"
   }
 }
