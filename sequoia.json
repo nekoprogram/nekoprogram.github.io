@@ -1,9 +1,10 @@
 {
   "$schema": "https://tangled.org/stevedylan.dev/sequoia/raw/main/sequoia.schema.json",
-  "siteUrl": "https://nekoprogram.github.io/",
+  "siteUrl": "https://nekoprogram.github.io",
   "contentDir": "./src/content/blog",
   "imagesDir": "./public/img",
   "outputDir": "./dist",
+  "urlPathTemplate": "{urlMap}",
   "publicationUri": "at://did:plc:osxkkjbh7ownrbtkoo2lqlmf/site.standard.publication/3mqf636aild2y",
   "frontmatter": {
     "publishDate": "date",
