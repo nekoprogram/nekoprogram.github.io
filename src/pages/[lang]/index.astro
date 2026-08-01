@@ -6,11 +6,11 @@ import { getCollection } from "astro:content";
 
 // 1. Le decimos a Astro que esta página existe para los 3 idiomas
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'es' } },
-    { params: { lang: 'en' } },
-    { params: { lang: 'ja' } },
-  ];
+    return [
+        { params: { lang: "es" } },
+        { params: { lang: "en" } },
+        { params: { lang: "ja" } },
+    ];
 }
 
 const { lang } = Astro.params;
@@ -20,8 +20,8 @@ const posts = await getCollection("blog");
 
 // 3. FILTRAMOS por el idioma de la URL y ordenamos por fecha
 const filteredPosts = posts
-    .filter(post => {
-        const postLang = post.data.lang || 'en';
+    .filter((post) => {
+        const postLang = post.data.lang || "en";
         return postLang === lang;
     })
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -40,7 +40,10 @@ const ui = {
         seeAnime: "Ver página de animes",
         aboutMe: "Sobre Mí",
         dateFormat: "es-ES",
-        contentwithTag:"Contenido(s) con etiqueta(s)"
+        contentwithTag: "Contenido(s) con etiqueta(s)",
+        defunctInstance: "Instancia Cerrada DEP",
+        linksTitle:"Enlaces",
+        deadLink:"Enlace roto / Caído",
     },
     en: {
         blogTitle: "Blog Posts",
@@ -51,7 +54,10 @@ const ui = {
         seeAnime: "See animes page",
         aboutMe: "About Me",
         dateFormat: "en-US",
-        contentwithTag:"Content(s) with Tag(s)"
+        contentwithTag: "Content(s) with Tag(s)",
+        defunctInstance:"Defunct instance RIP",
+        linksTitle:"Links",
+        deadLink:"Dead Link",
     },
     ja: {
         blogTitle: "ブログ記事",
@@ -62,8 +68,11 @@ const ui = {
         seeAnime: "アニメページを見る",
         aboutMe: "私について",
         dateFormat: "ja-JP",
-        contentwithTag:"タグが付いたコンテンツ"
-    }
+        contentwithTag: "タグが付いたコンテンツ",
+        defunctInstance:"閉鎖されたインスタンス",
+        linksTitle: "リンク",
+        deadLink: "デッドリンク / リンク切れ",
+    },
 };
 
 const t = ui[lang as keyof typeof ui] || ui.en;
@@ -101,7 +110,10 @@ const t = ui[lang as keyof typeof ui] || ui.en;
                                 <div class="tag-container">
                                     {post.data.tags.map((tag) => (
                                         // Enlace a tags corregido
-                                        <a href={`/${lang}/tags/${tag}`} class="tag">
+                                        <a
+                                            href={`/${lang}/tags/${tag}`}
+                                            class="tag"
+                                        >
                                             #{tag}
                                         </a>
                                     ))}
@@ -116,11 +128,17 @@ const t = ui[lang as keyof typeof ui] || ui.en;
         </div>
         <section id="links">
             <div id="text">
-                <h3>{t.welcome} <a style="color:white;" href="https://github.com/nekoprogram" target="_blank"><Icon name="simple-icons:github"></Icon></a></h3>
+                <h3>
+                    {t.welcome}
+                    <a
+                        style="color:white;"
+                        href="https://github.com/nekoprogram"
+                        target="_blank"><Icon name="simple-icons:github" /></a>
+                </h3>
                 <i>A cyber cat Nyan &gt;.&lt;</i>
                 {/* Enlace de "About Me" corregido */}
                 <a href={`/${lang}/about`}>{t.aboutMe}</a>
-                <h3>Links</h3>
+                <h3>{t.linksTitle}</h3>
                 <ul>
                     <li>
                         <a
@@ -134,18 +152,7 @@ const t = ui[lang as keyof typeof ui] || ui.en;
                             Misskey
                         </a>
                     </li>
-                    <li>
-                        <a
-                            href="https://dill.burggit.moe/@nekoprogram"
-                            target="_blank"
-                        >
-                            <Icon
-                                name="simple-icons:misskey"
-                                style="width: 20px; vertical-align: middle; margin-right: 5px;"
-                            />
-                            Burggit (Alt. Misskey Fork of Misskey)
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="https://tkz.one/@nekoprogram" target="_blank">
                             <Icon
@@ -181,6 +188,19 @@ const t = ui[lang as keyof typeof ui] || ui.en;
                         </a>
                     </li>
                 </ul>
+                <h3>{t.deadLink}</h3>
+                <ul>
+                    <li class="dead-link">
+                        <Icon
+                            name="simple-icons:misskey"
+                            
+                        />
+                        <span class="text"
+                            >Burggit (Alt. Misskey. Fork of Misskey)</span
+                        >
+                        <span id="grave"> {t.defunctInstance} 2026 (410 Gone)</span>
+                    </li>
+                </ul>
             </div>
             <section>
                 <h3>{t.favAnime}</h3>
@@ -190,3 +210,27 @@ const t = ui[lang as keyof typeof ui] || ui.en;
         </section>
     </section>
 </Layout>
+<style>
+    .dead-link {
+    color: #7f8c8d; /* Color gris apagado */
+    opacity: 0.55;   /* Reduce la intensidad general */
+    filter: grayscale(100%); /* Asegura que el icono también pierda color */
+    user-select: none; /* Opcional: evita que el texto resalte tanto al seleccionar */
+  }
+
+  .dead-link .text {
+    text-decoration: line-through; /* Efecto tachado (opcional) */
+  }
+
+  #grave {
+    font-size: 0.8em;
+    font-weight: bold;
+    background-color: #333;
+    color: #f1f1f1; /* Un rojo apagado para la alerta "410 Gone" */
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    display: block;
+    text-align: center;
+  }
+</style>
