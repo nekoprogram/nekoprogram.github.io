@@ -1,6 +1,7 @@
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 // 1. Importamos el cargador de archivos locales (glob)
+import { z } from 'zod';
 import { glob } from 'astro/loaders';
 
 const blogCollection = defineCollection({

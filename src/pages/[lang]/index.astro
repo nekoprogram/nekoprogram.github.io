@@ -108,7 +108,7 @@ const t = ui[lang as keyof typeof ui] || ui.en;
                                 </span>
 
                                 <div class="tag-container">
-                                    {post.data.tags.map((tag) => (
+                                    {post.data.tags.map((tag:String) => (
                                         // Enlace a tags corregido
                                         <a
                                             href={`/${lang}/tags/${tag}`}
@@ -137,7 +137,7 @@ const t = ui[lang as keyof typeof ui] || ui.en;
                 </h3>
                 <i>A cyber cat Nyan &gt;.&lt;</i>
                 {/* Enlace de "About Me" corregido */}
-                <a href={`/${lang}/about`}>{t.aboutMe}</a>
+                <a href={`/${lang}/about`}>&nbsp;{t.aboutMe}</a>
                 <h3>{t.linksTitle}</h3>
                 <ul>
                     <li>

@@ -13,10 +13,10 @@
     "sequoia:publish": "sequoia publish"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.10",
     "@iconify-json/simple-icons": "^1.2.86",
     "@iconify-json/tabler": "^1.2.35",
-    "astro": "^6.4.4",
+    "astro": "^7.3.8",
     "astro-icon": "^1.1.5",
     "typescript": "^5.4.5"
   },
